@@ -1,16 +1,15 @@
-#---------------------------------------------------------------------------------------------------------------
-# Name:        Sokoban GUI Puzzle
-# Purpose:     Plays a single iteration of Sokoban. I intend to edit this code in the future to allow for any
-#              map iteration to be passed as input.
-# Author:      Travis
-#
-# Created:     04/17/2018
-#---------------------------------------------------------------------------------------------------------------
+"""
+Name: Sokoban GUI Puzzle
+Purpose: Plays a single iteration of Sokoban. I intend to edit this code in the future to allow for any map iteration to be passed as input.
+Author: Travis
+Created: 04/17/2018
+Updated: 06/16/26
+"""
 
 def printsep(number=92): print("-"*number)
 def space(number=1): print("\n"*number)
 def fill_out(title): return("_"*(92-len(title)))
-from tkinter import *
+import tkinter as tk
 
 vert=6
 hor=10
@@ -40,130 +39,131 @@ translate = [
 endgame_count = translate.count('E')
 
 
-class Map(Tk):
-    def __init__(self):
-        Tk.__init__(self)
+class Map(tk.Frame):
+    def __init__(self,title,master=None):
+        super().__init__(master)
+        self.pack()
         self.mainFont = ("Times New Roman", "12", "bold")
-        self.title("Map of Maze")
+        self.title = title
         self.selection()
 
     def selection(self):
-        Label(self, text = "Sokoban Board", font = self.mainFont).grid(row = 0,
-            column = 5, columnspan =9)
+        L0 = tk.Label(self, text = "Sokoban Board", font = self.mainFont)
+        L0.grid(row = 0, column = 5, columnspan =9)
 
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=5,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=6,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=7,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=8,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=9,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=1,column=10,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=1,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=1,column=12,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=1,column=13,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=5,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=6,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=7,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=8,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=9,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=1,column=10,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=1,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=1,column=12,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=1,column=13,columnspan=1)
 
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=2,column=5,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=6,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=7,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=8,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=2,column=9,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=10,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=12,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=13,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=2,column=5,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=6,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=7,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=8,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=2,column=9,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=10,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=12,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=13,columnspan=1)
 
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=5,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=3,column=6,columnspan=1)
-        Label(self,text="O",  font= self.mainFont).grid(row=3,column=7,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=3,column=8,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=9,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=3,column=10,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=11,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=12,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=13,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=5,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=3,column=6,columnspan=1)
+        tk.Label(self,text="O",  font= self.mainFont).grid(row=3,column=7,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=3,column=8,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=9,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=3,column=10,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=11,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=12,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=13,columnspan=1)
 
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=5,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=4,column=6,columnspan=1)
-        Label(self,text="O",  font= self.mainFont).grid(row=4,column=7,columnspan=1)
-        Label(self,text="",  font= self.mainFont).grid(row=4,column=8,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=9,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=4,column=10,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont, bg='green').grid(row=4,column=12,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=13,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=5,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=4,column=6,columnspan=1)
+        tk.Label(self,text="O",  font= self.mainFont).grid(row=4,column=7,columnspan=1)
+        tk.Label(self,text="",  font= self.mainFont).grid(row=4,column=8,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=9,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=4,column=10,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont, bg='green').grid(row=4,column=12,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=13,columnspan=1)
 
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=5,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=6,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=7,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=5,column=8,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=9,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=10,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont, bg='green').grid(row=5,column=12,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=13,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=5,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=6,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=7,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=5,column=8,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=9,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=10,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont, bg='green').grid(row=5,column=12,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=13,columnspan=1)
 
-        Label(self,text=" ",  font= self.mainFont).grid(row=6,column=5,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=6,column=6,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=6,column=7,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=6,column=8,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=6,column=9,columnspan=1)
-        Label(self,text="*",  font= self.mainFont).grid(row=6,column=10,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=6,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont, bg='green').grid(row=6,column=12,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=6,column=13,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=6,column=5,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=6,column=6,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=6,column=7,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=6,column=8,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=6,column=9,columnspan=1)
+        tk.Label(self,text="*",  font= self.mainFont).grid(row=6,column=10,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=6,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont, bg='green').grid(row=6,column=12,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=6,column=13,columnspan=1)
 
-        Label(self,text=" ",  font= self.mainFont).grid(row=7,column=5,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=7,column=6,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=7,column=7,columnspan=1)
-        Label(self,text="O",  font= self.mainFont).grid(row=7,column=8,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=7,column=9,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=7,column=10,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=7,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=7,column=12,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=7,column=13,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=7,column=5,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=7,column=6,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=7,column=7,columnspan=1)
+        tk.Label(self,text="O",  font= self.mainFont).grid(row=7,column=8,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=7,column=9,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=7,column=10,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=7,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=7,column=12,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=7,column=13,columnspan=1)
 
-        Label(self,text=" ",  font= self.mainFont).grid(row=8,column=5,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=6,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=8,column=7,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=8,column=8,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=8,column=9,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=10,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=11,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=12,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=13,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=8,column=5,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=6,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=8,column=7,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=8,column=8,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=8,column=9,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=10,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=11,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=12,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=13,columnspan=1)
 
-        Label(self,text=" ",  font= self.mainFont).grid(row=9,column=5,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=6,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=7,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=8,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=9,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=10,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=9,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=9,column=12,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=9,column=13,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=9,column=5,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=6,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=7,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=8,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=9,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=10,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=9,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=9,column=12,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=9,column=13,columnspan=1)
 
 
 
-        self.button2 = Button(self, text= "left")
+        self.button2 = tk.Button(self, text= "left")
         self.button2.grid(row=2, column =0, columnspan = 2)
         self.button2["command"] = self.left
 
-        self.button3 = Button(self, text= "right")
+        self.button3 = tk.Button(self, text= "right")
         self.button3.grid(row=2, column =2, columnspan = 2)
         self.button3["command"] = self.right
 
-        self.button4 = Button(self, text= "up")
+        self.button4 = tk.Button(self, text= "up")
         self.button4.grid(row=1, column =1, columnspan = 2)
         self.button4["command"] = self.up
 
-        self.button5 = Button(self, text= "down")
+        self.button5 = tk.Button(self, text= "down")
         self.button5.grid(row=3, column =1, columnspan = 2)
         self.button5["command"] = self.down
         
-        self.button6 = Button(self, text= "What is Sokoban?")
+        self.button6 = tk.Button(self, text= "What is Sokoban?")
         self.button6.grid(row=7, column =0, columnspan = 4)
         self.button6["command"] = self.what
         
-        self.button7 = Button(self, text= "Reset Board")
+        self.button7 = tk.Button(self, text= "Reset Board")
         self.button7.grid(row=9, column=0, columnspan = 4)
         self.button7["command"] = self.reset
 
@@ -277,95 +277,95 @@ class Map(Tk):
         hor = 10
 
         
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=5,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=6,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=7,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=8,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=9,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=1,column=10,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=1,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=1,column=12,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=1,column=13,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=5,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=6,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=7,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=8,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=9,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=1,column=10,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=1,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=1,column=12,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=1,column=13,columnspan=1)
 
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=2,column=5,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=6,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=7,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=8,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=2,column=9,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=10,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=12,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=2,column=13,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=2,column=5,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=6,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=7,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=8,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=2,column=9,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=10,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=12,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=2,column=13,columnspan=1)
 
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=5,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=3,column=6,columnspan=1)
-        Label(self,text="O",  font= self.mainFont).grid(row=3,column=7,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=3,column=8,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=9,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=3,column=10,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=11,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=12,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=13,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=5,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=3,column=6,columnspan=1)
+        tk.Label(self,text="O",  font= self.mainFont).grid(row=3,column=7,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=3,column=8,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=9,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=3,column=10,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=11,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=12,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=3,column=13,columnspan=1)
 
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=5,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=4,column=6,columnspan=1)
-        Label(self,text="O",  font= self.mainFont).grid(row=4,column=7,columnspan=1)
-        Label(self,text="",  font= self.mainFont).grid(row=4,column=8,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=9,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=4,column=10,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont, bg='green').grid(row=4,column=12,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=13,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=5,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=4,column=6,columnspan=1)
+        tk.Label(self,text="O",  font= self.mainFont).grid(row=4,column=7,columnspan=1)
+        tk.Label(self,text="",  font= self.mainFont).grid(row=4,column=8,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=9,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=4,column=10,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont, bg='green').grid(row=4,column=12,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=4,column=13,columnspan=1)
 
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=5,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=6,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=7,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=5,column=8,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=9,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=10,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont, bg='green').grid(row=5,column=12,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=13,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=5,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=6,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=7,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=5,column=8,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=9,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=10,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont, bg='green').grid(row=5,column=12,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=5,column=13,columnspan=1)
 
-        Label(self,text=" ",  font= self.mainFont).grid(row=6,column=5,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=6,column=6,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=6,column=7,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=6,column=8,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=6,column=9,columnspan=1)
-        Label(self,text="*",  font= self.mainFont).grid(row=6,column=10,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=6,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont, bg='green').grid(row=6,column=12,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=6,column=13,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=6,column=5,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=6,column=6,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=6,column=7,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=6,column=8,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=6,column=9,columnspan=1)
+        tk.Label(self,text="*",  font= self.mainFont).grid(row=6,column=10,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=6,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont, bg='green').grid(row=6,column=12,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=6,column=13,columnspan=1)
 
-        Label(self,text=" ",  font= self.mainFont).grid(row=7,column=5,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=7,column=6,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=7,column=7,columnspan=1)
-        Label(self,text="O",  font= self.mainFont).grid(row=7,column=8,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=7,column=9,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=7,column=10,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=7,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=7,column=12,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=7,column=13,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=7,column=5,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=7,column=6,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=7,column=7,columnspan=1)
+        tk.Label(self,text="O",  font= self.mainFont).grid(row=7,column=8,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=7,column=9,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=7,column=10,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=7,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=7,column=12,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=7,column=13,columnspan=1)
 
-        Label(self,text=" ",  font= self.mainFont).grid(row=8,column=5,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=6,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=8,column=7,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=8,column=8,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=8,column=9,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=10,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=11,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=12,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=13,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=8,column=5,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=6,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=8,column=7,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=8,column=8,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=8,column=9,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=10,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=11,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=12,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=8,column=13,columnspan=1)
 
-        Label(self,text=" ",  font= self.mainFont).grid(row=9,column=5,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=6,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=7,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=8,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=9,columnspan=1)
-        Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=10,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=9,column=11,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=9,column=12,columnspan=1)
-        Label(self,text=" ",  font= self.mainFont).grid(row=9,column=13,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=9,column=5,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=6,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=7,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=8,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=9,columnspan=1)
+        tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=9,column=10,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=9,column=11,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=9,column=12,columnspan=1)
+        tk.Label(self,text=" ",  font= self.mainFont).grid(row=9,column=13,columnspan=1)
 
 
     def moveblock(self,p,q,r,s):
@@ -377,23 +377,23 @@ class Map(Tk):
         if down_val=="&" and ext_down_val=="E":
             translate[down_place]="E"
             translate[ext_down_place]="&"
-            Label(self,text=" ",  font= self.mainFont,bg='green').grid(row=p,column=q,columnspan=1)
-            Label(self,text="O",  font= self.mainFont,bg='green').grid(row=r,column=s,columnspan=1)
+            tk.Label(self,text=" ",  font= self.mainFont,bg='green').grid(row=p,column=q,columnspan=1)
+            tk.Label(self,text="O",  font= self.mainFont,bg='green').grid(row=r,column=s,columnspan=1)
         elif down_val=="&" and ext_down_val==" ":
             translate[down_place]="E"
             translate[ext_down_place]="O"
-            Label(self,text=" ",  font= self.mainFont,bg='green').grid(row=p,column=q,columnspan=1)
-            Label(self,text="O",  font= self.mainFont).grid(row=r,column=s,columnspan=1)
+            tk.Label(self,text=" ",  font= self.mainFont,bg='green').grid(row=p,column=q,columnspan=1)
+            tk.Label(self,text="O",  font= self.mainFont).grid(row=r,column=s,columnspan=1)
         elif down_val=="O" and ext_down_val=="E":
             translate[down_place]=" "
             translate[ext_down_place]="&"
-            Label(self,text=" ",  font= self.mainFont).grid(row=p,column=q,columnspan=1)
-            Label(self,text="O",  font= self.mainFont,bg='green').grid(row=r,column=s,columnspan=1)
+            tk.Label(self,text=" ",  font= self.mainFont).grid(row=p,column=q,columnspan=1)
+            tk.Label(self,text="O",  font= self.mainFont,bg='green').grid(row=r,column=s,columnspan=1)
         elif down_val=="O" and ext_down_val==" ":
             translate[down_place]=" "
             translate[ext_down_place]="O"
-            Label(self,text=" ",  font= self.mainFont).grid(row=p,column=q,columnspan=1)
-            Label(self,text="O",  font= self.mainFont).grid(row=r,column=s,columnspan=1)
+            tk.Label(self,text=" ",  font= self.mainFont).grid(row=p,column=q,columnspan=1)
+            tk.Label(self,text="O",  font= self.mainFont).grid(row=r,column=s,columnspan=1)
         else:
             "This configuration seems to be problematic."
 
@@ -424,48 +424,48 @@ class Map(Tk):
         if current_loc=="e" and new_loc=="E":
             translate[current_place]="E"
             translate[new_place]="e"
-            Label(self,text=" ",  font= self.mainFont,bg='green').grid(row=vert,column=hor,columnspan=1)
-            Label(self,text="*",  font= self.mainFont,bg='green').grid(row=newvert,column=newhor,columnspan=1)
+            tk.Label(self,text=" ",  font= self.mainFont,bg='green').grid(row=vert,column=hor,columnspan=1)
+            tk.Label(self,text="*",  font= self.mainFont,bg='green').grid(row=newvert,column=newhor,columnspan=1)
             vert=newvert
             hor=newhor
             print("Your current location is ({},{}).".format(vert,hor))
         elif current_loc=="e" and new_loc==" ":
             translate[current_place]="E"
             translate[new_place]="L"
-            Label(self,text=" ",  font= self.mainFont,bg='green').grid(row=vert,column=hor,columnspan=1)
-            Label(self,text="*",  font= self.mainFont).grid(row=newvert,column=newhor,columnspan=1)
+            tk.Label(self,text=" ",  font= self.mainFont,bg='green').grid(row=vert,column=hor,columnspan=1)
+            tk.Label(self,text="*",  font= self.mainFont).grid(row=newvert,column=newhor,columnspan=1)
             vert=newvert
             hor=newhor
             print("Your current location is ({},{}).".format(vert,hor))
         elif current_loc=="L" and new_loc=="E":
             translate[current_place]=" "
             translate[new_place]="e"
-            Label(self,text=" ",  font= self.mainFont).grid(row=vert,column=hor,columnspan=1)
-            Label(self,text="*",  font= self.mainFont, bg='green').grid(row=newvert,column=newhor,columnspan=1)
+            tk.Label(self,text=" ",  font= self.mainFont).grid(row=vert,column=hor,columnspan=1)
+            tk.Label(self,text="*",  font= self.mainFont, bg='green').grid(row=newvert,column=newhor,columnspan=1)
             vert=newvert
             hor=newhor
             print("Your current location is ({},{}).".format(vert,hor))
         elif current_loc=="L" and new_loc==" ":
             translate[current_place]=" "
             translate[new_place]="L"
-            Label(self,text=" ",  font= self.mainFont).grid(row=vert,column=hor,columnspan=1)
-            Label(self,text="*",  font= self.mainFont).grid(row=newvert,column=newhor,columnspan=1)
+            tk.Label(self,text=" ",  font= self.mainFont).grid(row=vert,column=hor,columnspan=1)
+            tk.Label(self,text="*",  font= self.mainFont).grid(row=newvert,column=newhor,columnspan=1)
             vert=newvert
             hor=newhor
             print("Your current location is ({},{}).".format(vert,hor))
         elif current_loc=="S" and new_loc=="E":
             translate[current_place]=" "
             translate[new_place]="e"
-            Label(self,text=" ",  font= self.mainFont).grid(row=vert,column=hor,columnspan=1)
-            Label(self,text="*",  font= self.mainFont, bg='green').grid(row=newvert,column=newhor,columnspan=1)
+            tk.Label(self,text=" ",  font= self.mainFont).grid(row=vert,column=hor,columnspan=1)
+            tk.Label(self,text="*",  font= self.mainFont, bg='green').grid(row=newvert,column=newhor,columnspan=1)
             vert=newvert
             hor=newhor
             print("Your current location is ({},{}).".format(vert,hor))
         elif current_loc=="S" and new_loc==" ":
             translate[current_place]=" "
             translate[new_place]="L"
-            Label(self,text=" ",  font= self.mainFont).grid(row=vert,column=hor,columnspan=1)
-            Label(self,text="*",  font= self.mainFont).grid(row=newvert,column=newhor,columnspan=1)
+            tk.Label(self,text=" ",  font= self.mainFont).grid(row=vert,column=hor,columnspan=1)
+            tk.Label(self,text="*",  font= self.mainFont).grid(row=newvert,column=newhor,columnspan=1)
             vert=newvert
             hor=newhor
             print("Your current location is ({},{}).".format(vert,hor))
@@ -535,14 +535,20 @@ def det_intct(inpt,ext_inpt):
     #where 1 means "action moves block direction indicated", where 2 means "can't move due to
     #block against wall", and where 3 means "action moves player direction indicated".
 
+# def main():
+#     map=Map("Map of Maze")
+#     print("Your location is indicated by '*'.\n")
+#     map.mainloop()
+
+
+# if __name__ == '__main__':
+#     #By default, '__name__' is set to equal '__main__', meaning that this statement is just to cause the
+#     #function main() to be executed, which sequentially then prompts the program to run.
+#     main()
+
 def main():
-    map=Map()
+    ourMap = Map("Map of Maze")
     print("Your location is indicated by '*'.\n")
-    map.mainloop()
-
-
-if __name__ == '__main__':
-    #By default, '__name__' is set to equal '__main__', meaning that this statement is just to cause the
-    #function main() to be executed, which sequentially then prompts the program to run.
-    main()
-
+    ourMap.mainloop()
+    
+main()
