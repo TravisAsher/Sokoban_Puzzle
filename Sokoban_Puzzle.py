@@ -48,8 +48,7 @@ class Map(tk.Frame):
         self.selection()
 
     def selection(self):
-        L0 = tk.Label(self, text = "Sokoban Board", font = self.mainFont)
-        L0.grid(row = 0, column = 5, columnspan =9)
+        tk.Label(self, text = "Sokoban Board", font = self.mainFont).grid(row = 0, column = 5, columnspan =9)
 
         tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=5,columnspan=1)
         tk.Label(self,text="X",  font= self.mainFont, bg='black').grid(row=1,column=6,columnspan=1)
